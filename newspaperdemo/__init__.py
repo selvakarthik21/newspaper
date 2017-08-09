@@ -41,13 +41,13 @@ def show_article():
       log.error("Couldn't process with NLP")
 
     a = {
-          'html': html_string, 
+         #'html': html_string, 
          'authors': str(', '.join(article.authors)), 
          'title': article.title,
          'text': article.text,
-         'top_image': article.top_image,
-         'videos': str(', '.join(article.movies)),
+         #'top_image': article.top_image,
+         #'videos': str(', '.join(article.movies)),
          'keywords': str(', '.join(article.keywords)),
          'summary': article.summary
          }
-    return render_template('article/index.html', article=a, url=url_to_clean)
+    return flask.jsonify(a)
