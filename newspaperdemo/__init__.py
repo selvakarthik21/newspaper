@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, Response
+from flask import Flask, request, render_template, redirect, url_for, json
 from newspaper import Article
 from xml.etree  import ElementTree
 
@@ -31,7 +31,13 @@ def show_article():
 	    'keywords': '',
 	    'summary': ''
 	  }
-	Response(json.dumps(a),  mimetype='application/json')
+	response = app.response_class(
+            response=json.dumps(a),
+            status=200,
+            mimetype='application/json'
+        )
+        return response 
+
 
     article = Article(url_to_clean)
     article.download()
@@ -54,4 +60,9 @@ def show_article():
 	 'keywords': str(', '.join(article.keywords)),
 	 'summary': article.summary
 	 }
-    return Response(json.dumps(a),  mimetype='application/json')
+    response = app.response_class(
+        response=json.dumps(a),
+        status=200,
+        mimetype='application/json'
+    )
+    return response 
