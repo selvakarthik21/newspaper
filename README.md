@@ -2,6 +2,6 @@
 
 Demo of the [Newspaper](https://github.com/codelucas/newspaper) article extraction library.
 
-Visit [http://https://scrape-article.herokuapp.com?url=<sample URL>](https://scrape-article.herokuapp.com/) for the demo.
+Visit [https://scrape-article.herokuapp.com?url=SampleURL](https://scrape-article.herokuapp.com?url=SampleURL) for the demo.
 
 Originally authored by [Rob Phillips](https://github.com/iwasrobbed)
