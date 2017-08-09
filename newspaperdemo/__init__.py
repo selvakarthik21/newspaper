@@ -47,4 +47,4 @@ def show_article():
          'keywords': str(', '.join(article.keywords)),
          'summary': article.summary
          }
-    return Flask.jsonify(a)
+    return jsonify(a)
