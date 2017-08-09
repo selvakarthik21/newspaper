@@ -21,7 +21,6 @@ def index():
     return render_template('index.html')
 
 @app.route('/')
-@app.route('/articles/show')
 def show_article():
     url_to_clean = request.args.get('url_to_clean')
     if not url_to_clean:
