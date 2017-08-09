@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, jsonify
+from flask import Flask, request, render_template, redirect, url_for, Response
 from newspaper import Article
 from xml.etree  import ElementTree
 
@@ -24,13 +24,15 @@ def index():
 def show_article():
     url_to_clean = request.args.get('url_to_clean')
     if not url_to_clean:
-	return jsonify(
-		'authors'= '', 
-		'title'= '',
-		'text'= '',
-		'keywords'= '',
-		'summary'= ''
-	)
+        a= {
+	    'authors': '', 
+	    'title': '',
+	    'text': '',
+	    'keywords': '',
+	    'summary': ''
+	  }
+	Response(json.dumps(a),  mimetype='application/json')
+
     article = Article(url_to_clean)
     article.download()
     article.parse()
@@ -46,19 +48,13 @@ def show_article():
       log.error("Couldn't process with NLP")
 
     a = {
-	  'html': html_string, 
+	 //'html': html_string, 
 	 'authors': str(', '.join(article.authors)), 
 	 'title': article.title,
 	 'text': article.text,
-	 'top_image': article.top_image,
-	 'videos': str(', '.join(article.movies)),
-	 'keywords': str(', '.join(article.keywords)),
+	 //'top_image': article.top_image,
+	 //'videos': str(', '.join(article.movies)),
+	 //'keywords': str(', '.join(article.keywords)),
 	 'summary': article.summary
 	 }
-    return jsonify(
-	'authors'= str(', '.join(article.authors)), 
-	'title'= article.title,
-	'text'= article.text,
-	'keywords'= str(', '.join(article.keywords)),
-	'summary'= article.summary
-    )
+    return Response(json.dumps(a),  mimetype='application/json')
