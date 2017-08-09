@@ -22,7 +22,7 @@ def index():
 
 @app.route('/')
 def show_article():
-    url_to_clean = request.args.get('url_to_clean')
+    url_to_clean = request.args.get('url')
     if not url_to_clean:
         return jsonify({
          'authors': '', 
