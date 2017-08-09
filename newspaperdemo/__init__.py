@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, json
+from flask import Flask, request, render_template, redirect, url_for
 from newspaper import Article
 from xml.etree  import ElementTree
 
@@ -20,24 +20,11 @@ except:
 def index():
     return render_template('index.html')
 
-@app.route('/scrape')
+@app.route('/articles/show')
 def show_article():
     url_to_clean = request.args.get('url_to_clean')
     if not url_to_clean:
-        a= {
-	    'authors': '', 
-	    'title': '',
-	    'text': '',
-	    'keywords': '',
-	    'summary': ''
-	  }
-	response = app.response_class(
-            response=json.dumps(a),
-            status=200,
-            mimetype='application/json'
-        )
-        return response 
-
+        return redirect(url_for('index'))
 
     article = Article(url_to_clean)
     article.download()
@@ -54,15 +41,13 @@ def show_article():
       log.error("Couldn't process with NLP")
 
     a = {
-	 'authors': str(', '.join(article.authors)), 
-	 'title': article.title,
-	 'text': article.text,
-	 'keywords': str(', '.join(article.keywords)),
-	 'summary': article.summary
-	 }
-    response = app.response_class(
-        response=json.dumps(a),
-        status=200,
-        mimetype='application/json'
-    )
-    return response 
+          'html': html_string, 
+         'authors': str(', '.join(article.authors)), 
+         'title': article.title,
+         'text': article.text,
+         'top_image': article.top_image,
+         'videos': str(', '.join(article.movies)),
+         'keywords': str(', '.join(article.keywords)),
+         'summary': article.summary
+         }
+    return render_template('article/index.html', article=a, url=url_to_clean)
