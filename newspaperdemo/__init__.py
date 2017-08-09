@@ -24,7 +24,13 @@ def index():
 def show_article():
     url_to_clean = request.args.get('url_to_clean')
     if not url_to_clean:
-        return redirect(url_for('index'))
+        return jsonify({
+         'authors': '', 
+         'title': '',
+         'text': '',
+         'keywords': '',
+         'summary': ''
+         })
 
     article = Article(url_to_clean)
     article.download()
