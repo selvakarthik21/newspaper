@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for,jsonify
 from newspaper import Article
 from xml.etree  import ElementTree
 
@@ -47,4 +47,4 @@ def show_article():
          'keywords': str(', '.join(article.keywords)),
          'summary': article.summary
          }
-    return flask.jsonify(**a)
+    return flask.jsonify(a)
