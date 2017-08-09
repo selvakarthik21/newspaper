@@ -16,11 +16,11 @@ except:
     _, ex, _ = sys.exc_info()
     log.error(ex.message)
 
-
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/')
+@app.route('/scrape')
 def show_article():
     url_to_clean = request.args.get('url_to_clean')
     if not url_to_clean:
