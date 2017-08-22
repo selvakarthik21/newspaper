@@ -37,15 +37,15 @@ def show_article():
     article.download()
     article.parse()
 
-    try:
-      html_string = ElementTree.tostring(article.clean_top_node)
-    except:
-      html_string = "Error converting html to string."
+    #try:
+      #html_string = ElementTree.tostring(article.clean_top_node)
+    #except:
+      #html_string = "Error converting html to string."
 
-    try:
-      article.nlp()
-    except:
-      log.error("Couldn't process with NLP")
+    #try:
+      #article.nlp()
+    #except:
+      #log.error("Couldn't process with NLP")
 
     a = {
          'authors': str(', '.join(article.authors)), 
