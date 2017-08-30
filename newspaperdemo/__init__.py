@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for,jsonify
-from newspaper import Article
+from source import Article
 from xml.etree  import ElementTree
 
 app = Flask(__name__)
