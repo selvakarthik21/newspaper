@@ -270,7 +270,8 @@ class ContentExtractor(object):
                               title_element_h1_list]
         if title_text_h1_list:
             # sort by len and set the longest
-            title_text_h1_list.sort(key=len, reverse=True)
+            # commented by karthik in order to take the first h1 as the title
+            # title_text_h1_list.sort(key=len, reverse=True)
             title_text_h1 = title_text_h1_list[0]
             # discard too short texts
             if len(title_text_h1.split(' ')) <= 2:
