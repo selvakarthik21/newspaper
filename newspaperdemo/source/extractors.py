@@ -344,7 +344,8 @@ class ContentExtractor(object):
         filter_title = filter_regex.sub('', title).lower()
         if filter_title_text_h1 == filter_title:
             title = title_text_h1
-
+        if title_text_h1 != '':
+            title = title_text_h1
         return title
 
     def split_title(self, title, splitter, hint=None):
