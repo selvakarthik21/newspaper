@@ -30,7 +30,7 @@ def show_article():
          'text': '',
          'keywords': '',
          'summary': '',
-         'contact' : 'karthik21@live.in'
+         'contact' : 'karthik21@live.in for further details'
          })
 
     article = Article(url_to_clean)
