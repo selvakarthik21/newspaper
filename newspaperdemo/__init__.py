@@ -30,7 +30,8 @@ def show_article():
          'text': '',
          'keywords': '',
          'summary': '',
-         'contact' : 'karthik21@live.in for further details'
+         'contact' : 'karthik21@live.in for further details',
+         'publish_date' :''
          })
 
     article = Article(url_to_clean)
@@ -52,6 +53,7 @@ def show_article():
          'title': article.title,
          'text': article.text,
          'keywords': str(', '.join(article.keywords)),
-         'summary': article.summary
+         'summary': article.summary,
+         'publish_date' :article.publish_date
          }
     return jsonify(a)
