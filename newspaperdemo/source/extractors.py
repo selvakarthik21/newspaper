@@ -273,8 +273,11 @@ class ContentExtractor(object):
             # commented by karthik in order to take the first h1 as the title
             # title_text_h1_list.sort(key=len, reverse=True)
             title_text_h1 = title_text_h1_list[0]
+            #The Straits Times text verfication
+            if 'The Straits Times' in title_text_h1:
+                title_text_h1 = title_text_h1_list[1]
             # discard too short texts
-            if len(title_text_h1.split(' ')) <= 4:
+            if len(title_text_h1.split(' ')) <= 2:
                 title_text_h1 = ''
             # clean double spaces
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
