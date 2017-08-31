@@ -274,7 +274,7 @@ class ContentExtractor(object):
             # title_text_h1_list.sort(key=len, reverse=True)
             title_text_h1 = title_text_h1_list[0]
             # discard too short texts
-            if len(title_text_h1.split(' ')) <= 2:
+            if len(title_text_h1.split(' ')) <= 4:
                 title_text_h1 = ''
             # clean double spaces
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
