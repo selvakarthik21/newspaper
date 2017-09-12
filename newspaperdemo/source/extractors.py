@@ -216,6 +216,41 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+
+            #added additional tag details by karthik
+
+            {'attribute': 'name', 'value': 'pubdate',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'timestamp',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'DC.date.issued',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'Date',
+             'content': 'content'},            
+            {'attribute': 'name', 'value': 'date',
+             'content': 'content'},
+            {'attribute': 'property', 'value': 'bt:pubDate',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'article.published',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'published-date',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'article.created',
+             'content': 'datetime'},
+            {'attribute': 'name', 'value': 'article_date_original',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'cXenseParse:recs:publishtime',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'DATE_PUBLISHED',
+             'content': 'content'},
+            {'attribute': 'itemprop', 'value': 'datePublished',
+             'content': 'datetime'},
+            {'attribute': 'itemprop', 'value': 'dateCreated',
+             'content': 'datetime'},
+            {'attribute': 'http-equiv', 'value': 'date',
+             'content': 'content'},
+            {'attribute': 'http-equiv', 'value': 'last-modified',
+             'content': 'content'}
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
