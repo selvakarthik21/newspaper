@@ -221,9 +221,11 @@ class ContentExtractor(object):
 
             {'attribute': 'name', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'name', 'value': 'Timestamp',
+             'content': 'datetime'},
             {'attribute': 'name', 'value': 'timestamp',
              'content': 'datetime'},
-            {'attribute': 'name', 'value': 'DC.date.issued',
+            {'attribute': 'name', 'value': 'DC.Date.Issued',
              'content': 'content'},
             {'attribute': 'name', 'value': 'Date',
              'content': 'content'},            
