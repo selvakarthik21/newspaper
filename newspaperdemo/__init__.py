@@ -7,6 +7,7 @@ app = Flask(__name__)
 # Debug logging
 import logging
 import sys
+import twitter
 # Defaults to stdout
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -19,6 +20,13 @@ except:
 @app.route('/articles/show')
 def index():
     return render_template('index.html')
+
+@app.route('/tweets')
+def twitter():
+    user = 'BCCI'
+    api = twitter.Api(consumer_key='consumer_key',consumer_secret='consumer_secret',access_token_key='access_token',access_token_secret='access_token_secret')
+    statuses = api.GetUserTimeline(screen_name=user)
+    return jsonify(statuses)
 
 @app.route('/')
 def show_article():
