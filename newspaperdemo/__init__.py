@@ -25,12 +25,12 @@ def index():
 def tweets():
     user = 'BCCI'
     api = twitter.Api(consumer_key='FuOSn2nnFQR6mUIgHYqkIghuv',consumer_secret='XdXhmwuAtylnfA9fhptWwlNW8MQopgVExiXpDYjIb1fPDrrcrq',access_token_key='823985712034787328-T3Zb8TPZ9cRkfPngZBqqmAfcLWpVHbR',access_token_secret='9ZcKPB6mvAHD2ZeajZ3wY7ZUY2WUjPYlIE68zOwzzGMUW')
-    print(api.VerifyCredentials())
+    #print(api.VerifyCredentials())
     statuses = api.GetUserTimeline(screen_name=user)
-    print([s.text for s in statuses])
+    #print([s.text for s in statuses])
     statusText = [s.text for s in statuses]
-    print(statusText)
-    return jsonify(statusText)
+    #print(statusText)
+    return statusText
 
 @app.route('/')
 def show_article():
