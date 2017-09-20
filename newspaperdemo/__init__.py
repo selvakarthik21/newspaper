@@ -28,7 +28,7 @@ def tweets():
     print(api.VerifyCredentials())
     statuses = api.GetUserTimeline(screen_name=user)
     print([s.text for s in statuses])
-    statusText = (s.text for s in statuses)
+    statusText = [s.text for s in statuses]
     print(statusText)
     return jsonify(statusText)
 
