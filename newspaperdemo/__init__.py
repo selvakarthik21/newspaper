@@ -30,7 +30,7 @@ def tweets():
     #print([s.text for s in statuses])
     statusText = [s.text for s in statuses]
     #print(statusText)
-    return statusText
+    return jsonify({'data': statusText})
 
 @app.route('/')
 def show_article():
