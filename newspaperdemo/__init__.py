@@ -35,8 +35,11 @@ def tweets():
 @app.route('/searchTweet')
 def user_tweets():
     user = request.args.get('user')
-    text = request.args.get('text')
-    search_text = ''.join(['q=from:',user,'%20',text,'&result_type=recent&since=2006-01-01&count=10'])
+    text = unicode(request.args.get('text'), "utf-8")
+    print(request.args.get('text'))
+    print(text)
+    search_text = ''.join(['q=from%3A',user,'%20',text,'&result_type=recent&since=2006-01-01&count=10'])
+    print(search_text)
     api = twitter.Api(consumer_key='FuOSn2nnFQR6mUIgHYqkIghuv',consumer_secret='XdXhmwuAtylnfA9fhptWwlNW8MQopgVExiXpDYjIb1fPDrrcrq',access_token_key='823985712034787328-T3Zb8TPZ9cRkfPngZBqqmAfcLWpVHbR',access_token_secret='9ZcKPB6mvAHD2ZeajZ3wY7ZUY2WUjPYlIE68zOwzzGMUW')
     #print(api.VerifyCredentials())
     #statuses = api.GetUserTimeline(screen_name=user)
