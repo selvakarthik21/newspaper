@@ -35,8 +35,7 @@ def tweets():
 @app.route('/searchTweet')
 def user_tweets():
     user = request.args.get('user')
-    text = unicode(request.args.get('text'), "utf-8")
-    print(request.args.get('text'))
+    text = request.args.get('text')
     print(text)
     search_text = ''.join(['q=from%3A',user,'%20',text,'&result_type=recent&since=2006-01-01&count=10'])
     print(search_text)
