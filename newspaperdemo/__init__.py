@@ -75,14 +75,24 @@ def show_article():
       #article.nlp()
     #except:
       #log.error("Couldn't process with NLP")
-
-    a = {
-         'authors': str(', '.join(article.authors)), 
-         'title': article.title,
-         'text': article.text,
-         'keywords': str(', '.join(article.keywords)),
-         'summary': article.summary,
-         'publish_date' :article.publish_date,
-         'html' : article.html
-         }
+    if url_to_clean.find("twitter.com") != -1:
+        a = {
+             'authors': str(', '.join(article.authors)), 
+             'title': article.title,
+             'text': article.text,
+             'keywords': str(', '.join(article.keywords)),
+             'summary': article.summary,
+             'publish_date' :article.publish_date,
+             'html' : article.html
+             }
+    else:
+        a = {
+             'authors': str(', '.join(article.authors)), 
+             'title': article.title,
+             'text': article.text,
+             'keywords': str(', '.join(article.keywords)),
+             'summary': article.summary,
+             'publish_date' :article.publish_date,
+             'html' : ''
+             }
     return jsonify(a)
