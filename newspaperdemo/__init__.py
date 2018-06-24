@@ -58,7 +58,8 @@ def show_article():
          'keywords': '',
          'summary': '',
          'contact' : 'karthik21@live.in for further details',
-         'publish_date' :''
+         'publish_date' :'',
+         'html' : ''
          })
 
     article = Article(url_to_clean)
@@ -81,6 +82,7 @@ def show_article():
          'text': article.text,
          'keywords': str(', '.join(article.keywords)),
          'summary': article.summary,
-         'publish_date' :article.publish_date
+         'publish_date' :article.publish_date,
+         'html' : article.html
          }
     return jsonify(a)
