@@ -18,7 +18,6 @@ from .settings import cj
 
 log = logging.getLogger(__name__)
 
-scraper = cfscrape.create_scraper() 
 
 FAIL_ENCODING = 'ISO-8859-1'
 
@@ -58,7 +57,7 @@ def get_html_2XX_only(url, config=None, response=None):
         return _get_html_from_response(response)
 
     try:
-        response = scraper.get(
+        response = requests.get(
             url=url, **get_request_kwargs(timeout, useragent))
     except requests.exceptions.RequestException as e:
         log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
@@ -99,7 +98,7 @@ class MRequest(object):
 
     def send(self):
         try:
-            self.resp = scraper.get(self.url, **get_request_kwargs(
+            self.resp = requests.get(self.url, **get_request_kwargs(
                                      self.timeout, self.useragent))
             if self.config.http_success_only:
                 self.resp.raise_for_status()
