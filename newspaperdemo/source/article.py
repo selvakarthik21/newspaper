@@ -163,11 +163,6 @@ class Article(object):
         if input_html is None:
             try:
                 html = network.get_html_2XX_only(self.url, self.config)
-                if "Your browser will redirect" in html:
-                    log.debug('CloudFlare Autobot Skip')
-                    scraper = cfscrape.create_scraper()
-                    html = scraper.get(self.url).content                  
-                    log.debug(html)
             except requests.exceptions.RequestException as e:
                 self.download_state = ArticleDownloadState.FAILED_RESPONSE
                 self.download_exception_msg = str(e)
