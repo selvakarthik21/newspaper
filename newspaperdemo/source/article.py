@@ -167,7 +167,7 @@ class Article(object):
             	for s in cloudFlareUrl:
 		            if s in self.url:
 		                isCloudFlareUrl = 'true'
-		                return		        
+		                break		        
     	        print(isCloudFlareUrl)
     	        if isCloudFlareUrl == 'true':
     	            print('CloudFlare Autobot Skip')
