@@ -162,12 +162,12 @@ class Article(object):
         """
         if input_html is None:
             try:
-            	isCloudFlareUrl = False
+            	isCloudFlareUrl = 'false'
             	for s in cloudFlareUrl:
 		            if s in self.url:
-		                isCloudFlareUrl = True
+		                isCloudFlareUrl = 'true'
 		                return True
-		        if isCloudFlareUrl:
+		        if isCloudFlareUrl == 'true':
 		            log.debug('CloudFlare Autobot Skip')
                     scraper = cfscrape.create_scraper()
                     html = scraper.get(self.url).content                  
