@@ -9,6 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
+import requests
 import cfscrape
 
 from .configuration import Configuration
@@ -38,7 +39,7 @@ def get_html(url, config=None, response=None):
     """
     try:
         return get_html_2XX_only(url, config, response)
-    except scraper.exceptions.RequestException as e:
+    except requests.exceptions.RequestException as e:
         log.debug('get_html() error. %s on URL: %s' % (e, url))
         return ''
 
@@ -59,7 +60,7 @@ def get_html_2XX_only(url, config=None, response=None):
     try:
         response = scraper.get(
             url=url, **get_request_kwargs(timeout, useragent))
-    except scraper.exceptions.RequestException as e:
+    except requests.exceptions.RequestException as e:
         log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
         return ''
 
@@ -102,7 +103,7 @@ class MRequest(object):
                                      self.timeout, self.useragent))
             if self.config.http_success_only:
                 self.resp.raise_for_status()
-        except scraper.exceptions.RequestException as e:
+        except requests.exceptions.RequestException as e:
             log.critical('[REQUEST FAILED] ' + str(e))
 
 
