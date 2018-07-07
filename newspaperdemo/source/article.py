@@ -174,7 +174,6 @@ class Article(object):
     	            scraper = cfscrape.create_scraper()
     	            html = scraper.get(self.url).content
     	            self.download_state = ArticleDownloadState.SUCCESS                  
-    	            print(html)
     	        else:
     	            html = network.get_html_2XX_only(self.url, self.config)
             except requests.exceptions.RequestException as e:
