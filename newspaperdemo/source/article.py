@@ -27,7 +27,7 @@ from .utils import (URLHelper, RawHelper, extend_config,
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
-cloudFlareUrl = []
+cloudFlareUrl = ["mothership.sg"]
 
 
 class ArticleDownloadState(object):
