@@ -217,7 +217,8 @@ class Source(object):
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
-            print('[Source parse ERR]', self.url)
+            if self.config.verbose:
+                print('[Source parse ERR]', self.url)
             return
         self.set_description()
 
@@ -261,7 +262,7 @@ class Source(object):
             for url in urls:
                 article = Article(
                     url=url,
-                    source_url=self.url,
+                    source_url=feed.url,
                     config=self.config)
                 cur_articles.append(article)
 
@@ -297,7 +298,7 @@ class Source(object):
 
                 _article = Article(
                     url=indiv_url,
-                    source_url=self.url,
+                    source_url=category.url,
                     title=indiv_title,
                     config=self.config
                 )

@@ -27,7 +27,8 @@ from .utils import (URLHelper, RawHelper, extend_config,
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
-cloudFlareUrl = ['mothership.sg']
+cloudFlareUrl = []
+
 
 class ArticleDownloadState(object):
     NOT_STARTED = 0
@@ -267,8 +268,7 @@ class Article(object):
             self.set_article_html(article_html)
             self.set_text(text)
 
-        if self.config.fetch_images:
-            self.fetch_images()
+        self.fetch_images()
 
         self.is_parsed = True
         self.release_resources()
@@ -287,9 +287,12 @@ class Article(object):
         if self.clean_top_node is not None and not self.has_top_image():
             first_img = self.extractor.get_first_img_url(
                 self.url, self.clean_top_node)
-            self.set_top_img(first_img)
+            if self.config.fetch_images:
+                self.set_top_img(first_img)
+            else:
+                self.set_top_img_no_check(first_img)
 
-        if not self.has_top_image():
+        if not self.has_top_image() and self.config.fetch_images:
             self.set_reddit_top_img()
 
     def has_top_image(self):
@@ -356,7 +359,8 @@ class Article(object):
         """
         self.throw_if_not_downloaded_verbose()
         self.throw_if_not_parsed_verbose()
-
+        
+        nlp.load_stopwords(self.config.get_language())
         text_keyws = list(nlp.keywords(self.text).keys())
         title_keyws = list(nlp.keywords(self.title).keys())
         keyws = list(set(title_keyws + text_keyws))
@@ -532,17 +536,14 @@ class Article(object):
         -> maybe throw ArticleException
         """
         if self.download_state == ArticleDownloadState.NOT_STARTED:
-            print('You must `download()` an article first!')
-            raise ArticleException()
+            raise ArticleException('You must `download()` an article first!')
         elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
-            print('Article `download()` failed with %s on URL %s' %
+            raise ArticleException('Article `download()` failed with %s on URL %s' %
                   (self.download_exception_msg, self.url))
-            raise ArticleException()
 
     def throw_if_not_parsed_verbose(self):
         """Parse `is_parsed` status -> log readable status 
         -> maybe throw ArticleException
         """
         if not self.is_parsed:
-            print('You must `parse()` an article first!')
-            raise ArticleException()
+            raise ArticleException('You must `parse()` an article first!')
