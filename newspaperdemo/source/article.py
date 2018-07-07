@@ -27,7 +27,7 @@ from .utils import (URLHelper, RawHelper, extend_config,
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
-
+cloudFlareUrl = ['mothership.sg']
 
 class ArticleDownloadState(object):
     NOT_STARTED = 0
@@ -162,7 +162,18 @@ class Article(object):
         """
         if input_html is None:
             try:
-                html = network.get_html_2XX_only(self.url, self.config)
+            	isCloudFlareUrl = false
+            	for s in cloudFlareUrl:
+		            if s in self.url:
+		            	isCloudFlareUrl = true
+		                return True
+		        if isCloudFlareUrl:
+		        	log.debug('CloudFlare Autobot Skip')
+                    scraper = cfscrape.create_scraper()
+                    html = scraper.get(self.url).content                  
+                    log.debug(html)
+                else:
+                	html = network.get_html_2XX_only(self.url, self.config)
             except requests.exceptions.RequestException as e:
                 self.download_state = ArticleDownloadState.FAILED_RESPONSE
                 self.download_exception_msg = str(e)
