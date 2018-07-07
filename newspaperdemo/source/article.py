@@ -166,15 +166,14 @@ class Article(object):
             	for s in cloudFlareUrl:
 		            if s in self.url:
 		                isCloudFlareUrl = 'true'
-		                return True
-			return False
-		        if isCloudFlareUrl == 'true':
-		            log.debug('CloudFlare Autobot Skip')
-                    scraper = cfscrape.create_scraper()
-                    html = scraper.get(self.url).content                  
-                    log.debug(html)
-                else:
-                    html = network.get_html_2XX_only(self.url, self.config)
+		                return		        
+    	        if isCloudFlareUrl == 'true':
+    	            log.debug('CloudFlare Autobot Skip')
+    	            scraper = cfscrape.create_scraper()
+    	            html = scraper.get(self.url).content                  
+    	            log.debug(html)
+    	        else:
+    	            html = network.get_html_2XX_only(self.url, self.config)
             except requests.exceptions.RequestException as e:
                 self.download_state = ArticleDownloadState.FAILED_RESPONSE
                 self.download_exception_msg = str(e)
