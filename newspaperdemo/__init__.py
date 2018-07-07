@@ -8,7 +8,6 @@ app = Flask(__name__)
 import logging
 import sys
 import twitter
-import cloudFlare
 
 # Defaults to stdout
 logging.basicConfig(level=logging.INFO)
@@ -22,10 +21,6 @@ except:
 @app.route('/articles/show')
 def index():
     return render_template('index.html')
-    
-@app.route('karthik')
-def karthik():
-    return jsonify({'data' : getCloudFlareContent('https://mothership.sg/2018/05/rp-student-pbl-changed-life/') })
     
 @app.route('/tweets')
 def tweets():
