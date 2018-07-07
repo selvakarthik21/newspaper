@@ -167,6 +167,7 @@ class Article(object):
 		            if s in self.url:
 		                isCloudFlareUrl = 'true'
 		                return True
+			return False
 		        if isCloudFlareUrl == 'true':
 		            log.debug('CloudFlare Autobot Skip')
                     scraper = cfscrape.create_scraper()
