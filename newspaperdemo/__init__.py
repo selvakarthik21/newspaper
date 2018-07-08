@@ -9,6 +9,7 @@ import logging
 import sys
 import twitter
 from twitterscraper import query_tweets
+from .twitterscraper import JSONEncoder
 
 # Defaults to stdout
 logging.basicConfig(level=logging.INFO)
@@ -42,8 +43,7 @@ def user_tweets():
     search_text = ''.join([text,' from:',user])
     print(search_text)
     list_of_tweets = query_tweets(search_text, 10)
-    #print(statusText)
-    return jsonify({'data': list_of_tweets})
+    return json.dumps(list_of_tweets, cls=JSONEncoder);
 
 @app.route('/')
 def show_article():
