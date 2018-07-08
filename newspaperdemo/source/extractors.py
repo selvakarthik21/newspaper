@@ -144,6 +144,7 @@ class ContentExtractor(object):
             for val in VALS:
                 # found = doc.xpath('//*[@%s="%s"]' % (attr, val))
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
+                print('%s = %s, where found = %s ' %(attr, val, found))
                 matches.extend(found)
 
         for match in matches:
