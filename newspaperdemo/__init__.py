@@ -8,6 +8,7 @@ app = Flask(__name__)
 import logging
 import sys
 import twitter
+from twitterscraper import query_tweets
 
 # Defaults to stdout
 logging.basicConfig(level=logging.INFO)
@@ -38,15 +39,11 @@ def user_tweets():
     user = request.args.get('user')
     text = request.args.get('text')
     print(text)
-    search_text = ''.join(['q=from%3A',user,'%20',text,'&result_type=recent&since=2006-01-01&count=10'])
+    search_text = ''.join([text,' from:',user])
     print(search_text)
-    api = twitter.Api(consumer_key='FuOSn2nnFQR6mUIgHYqkIghuv',consumer_secret='XdXhmwuAtylnfA9fhptWwlNW8MQopgVExiXpDYjIb1fPDrrcrq',access_token_key='823985712034787328-T3Zb8TPZ9cRkfPngZBqqmAfcLWpVHbR',access_token_secret='9ZcKPB6mvAHD2ZeajZ3wY7ZUY2WUjPYlIE68zOwzzGMUW')
-    #print(api.VerifyCredentials())
-    statuses = api.GetSearch(raw_query=search_text)
-    #print([s.text for s in statuses])
-    statusText = [s.text for s in statuses]
+    list_of_tweets = query_tweets(search_text, 10)
     #print(statusText)
-    return jsonify({'data': statusText})
+    return jsonify({'data': list_of_tweets})
 
 @app.route('/')
 def show_article():
