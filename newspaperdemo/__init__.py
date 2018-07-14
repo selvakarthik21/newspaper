@@ -11,7 +11,7 @@ import twitter
 import json
 import collections
 import datetime as dt
-from twitterscraper import query_tweets_once
+from twitterscraper import query_tweets
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -62,7 +62,7 @@ def user_tweets():
     print(text)
     search_text = ''.join([text,' from:',user])
     print(search_text)
-    list_of_tweets = query_tweets_once(search_text, 1)
+    list_of_tweets = query_tweets(search_text, 1,None,None,1,'')
     return json.dumps(list_of_tweets, cls=JSONEncoder);
 
 @app.route('/')
