@@ -11,7 +11,7 @@ import twitter
 import json
 import collections
 import datetime as dt
-from twitterscraper import query_tweets
+from twitterscraper import query_tweets_once
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
