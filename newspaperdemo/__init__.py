@@ -62,7 +62,7 @@ def user_tweets():
     print(text)
     search_text = ''.join([text,' from:',user])
     print(search_text)
-    list_of_tweets = query_tweets(search_text, 1,None,None,1,'')
+    list_of_tweets = query_tweets(search_text, 1,dt.date(2006,3,1),dt.date.today(),1,'')
     return json.dumps(list_of_tweets, cls=JSONEncoder);
 
 @app.route('/')
