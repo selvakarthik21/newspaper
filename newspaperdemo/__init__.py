@@ -114,3 +114,28 @@ def show_article():
              'html' : ''
              }
     return jsonify(a)
+@app.route('/scrape')
+def show_article():
+    url_to_clean = request.args.get('url')
+    if not url_to_clean:
+        return jsonify({
+         'html' : ''
+         })
+
+    article = Article(url_to_clean)
+    article.download()
+    article.parse()
+
+    #try:
+      #html_string = ElementTree.tostring(article.clean_top_node)
+    #except:
+      #html_string = "Error converting html to string."
+
+    #try:
+      #article.nlp()
+    #except:
+      #log.error("Couldn't process with NLP")
+     a = {
+             'html' : article.html
+             }
+    return jsonify(a)
